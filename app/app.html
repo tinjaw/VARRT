@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Hello Electron React!</title>
+    <title>VARRT -- VAssal Reporting Tool</title>
     <script>
       (() => {
         if (
@@ -20,6 +20,11 @@
   </head>
   <body>
     <div id="root"></div>
+    <link
+      rel="stylesheet"
+      href="../node_modules/tachyons/css/tachyons.min.css"
+      class="stylesheet"
+    />
     <script>
       if (typeof process === 'object') {
         const scripts = [];
@@ -40,7 +45,7 @@
         if (scripts.length) {
           document.write(
             scripts
-              .map(script => `<script defer src="${script}"><\/script>`)
+              .map((script) => `<script defer src="${script}"><\/script>`)
               .join('')
           );
         }
