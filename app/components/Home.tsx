@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { remote } from 'electron';
 import { promises } from 'fs';
@@ -24,16 +25,20 @@ export default function Home(): JSX.Element {
     const jsonData = JSON.stringify(rawData);
     // eslint-disable-next-line no-console
     console.log(`We finish with ${jsonData}`);
+    // noinspection SpellCheckingInspection
     const expression = jsonata(
       '`Game Map`.*.{"Symbol Code": "SFGPU------****", "Name": BasicName, "Comment": "This is a comment.", "Latitude": function($pixels) { 57.64451092 - $pixels * 0.000245657 }(CurrentX), "Longitude": function($pixels) { 22.9375029 + $pixels * 0.000388979 }(CurrentX)}'
     );
     const result = expression.evaluate(rawData);
-    // noinspection JSUnusedLocalSymbols
+    // noinspection SpellCheckingInspection
     const columns = [
-      { label: 'Symbol Code', value: (row) => 'SFGPU------****' },
+      { label: 'Symbol Code', value: () => 'SFGPU------****' },
+      // @ts-ignore
       { label: 'Name', value: (row) => row.Name },
-      { label: 'Comment', value: (row) => 'This is a fine comment.' },
+      { label: 'Comment', value: () => 'This is a fine comment.' },
+      // @ts-ignore
       { label: 'Latitude', value: (row) => row.Latitude },
+      // @ts-ignore
       { label: 'Longitude', value: (row) => row.Longitude },
     ];
     const settings = {
