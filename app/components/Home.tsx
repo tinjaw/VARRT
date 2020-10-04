@@ -5,10 +5,9 @@ import { promises } from 'fs';
 import jsonata from 'jsonata';
 import styles from './Home.css';
 
-const parse = require('json2csv');
 const xslx = require('json-as-xlsx');
 
-export default function Home(): JSX.Element {
+export default function Home() {
   async function getFile() {
     const filename = await remote.dialog.showOpenDialog({
       properties: ['openFile'],
@@ -20,16 +19,8 @@ export default function Home(): JSX.Element {
     });
   }
 
-  async function queryFileForJSON() {
-    const rawData = await getFile();
-    const jsonData = JSON.stringify(rawData);
-    // eslint-disable-next-line no-console
-    console.log(`We finish with ${jsonData}`);
-    // noinspection SpellCheckingInspection
-    const expression = jsonata(
-      '`Game Map`.*.{"Symbol Code": "SFGPU------****", "Name": BasicName, "Comment": "This is a comment.", "Latitude": function($pixels) { 57.64451092 - $pixels * 0.000245657 }(CurrentX), "Longitude": function($pixels) { 22.9375029 + $pixels * 0.000388979 }(CurrentX)}'
-    );
-    const result = expression.evaluate(rawData);
+  // @ts-ignore
+  const queryResult = (result) => {
     // noinspection SpellCheckingInspection
     const columns = [
       { label: 'Symbol Code', value: () => 'SFGPU------****' },
@@ -40,6 +31,7 @@ export default function Home(): JSX.Element {
       { label: 'Latitude', value: (row) => row.Latitude },
       // @ts-ignore
       { label: 'Longitude', value: (row) => row.Longitude },
+      { label: 'Key', value: () => '' },
     ];
     const settings = {
       sheetName: 'First Sheet',
@@ -48,6 +40,19 @@ export default function Home(): JSX.Element {
     };
     const download = true;
     xslx(columns, result, settings, download);
+  };
+
+  async function queryFileForJSON() {
+    const rawData = await getFile();
+    const jsonData = JSON.stringify(rawData);
+    // eslint-disable-next-line no-console
+    console.log(`We finish with ${jsonData}`);
+    // noinspection SpellCheckingInspection
+    const expression = jsonata(
+      '`Game Map`.*.{"Symbol Code": "SFGPU------****", "Name": BasicName, "Comment": "This is a comment.", "Latitude": function($pixels) { 57.64451092 - $pixels * 0.000245657 }(CurrentX), "Longitude": function($pixels) { 22.9375029 + $pixels * 0.000388979 }(CurrentX)}'
+    );
+    const result = expression.evaluate(rawData);
+    queryResult(result);
     // eslint-disable-next-line no-console
     console.log(JSON.stringify(result));
     return result;
@@ -55,11 +60,7 @@ export default function Home(): JSX.Element {
 
   function getOnClick() {
     async function getClick() {
-      const result = await queryFileForJSON();
-      // Convert JSON to CSV
-      const csv = parse(result);
-      // eslint-disable-next-line no-console
-      console.log(csv);
+      await queryFileForJSON();
     }
     return getClick;
   }
