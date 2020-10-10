@@ -2,6 +2,8 @@
 import React from 'react';
 import { remote } from 'electron';
 import { promises } from 'fs';
+// import { v4 as uuidv4 } from 'uuid';
+import sha1 from 'sha1';
 import jsonata from 'jsonata';
 import styles from './Home.css';
 
@@ -31,7 +33,8 @@ export default function Home() {
       { label: 'Latitude', value: (row) => row.Latitude },
       // @ts-ignore
       { label: 'Longitude', value: (row) => row.Longitude },
-      { label: 'Key', value: () => '' },
+      // @ts-ignore
+      { label: 'Key', value: (row) => sha1(row.Name) },
     ];
     const settings = {
       sheetName: 'First Sheet',
