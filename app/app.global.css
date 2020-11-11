@@ -4,12 +4,14 @@
  */
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+/* @import '~bootstrap/dist/css/bootstrap.css'; */
+
 body {
   position: relative;
   color: white;
   height: 100vh;
   background-color: #232c39;
-  background-image: url('VARRT_Splash.png');
+  background-image: url('img/VARRT_Splash.png');
   background-repeat: no-repeat;
   background-size: 1920px, 1080px;
   background-position: center;
