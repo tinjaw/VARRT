@@ -10,6 +10,9 @@ body {
   height: 100vh;
   background-color: #232c39;
   background-image: url('VARRT_Splash.png');
+  background-repeat: no-repeat;
+  background-size: 1920px, 1080px;
+  background-position: center;
   font-family: Arial, Helvetica, Helvetica Neue, serif;
   overflow-y: hidden;
 }
