@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CommandLayerSchema"
+           targetNamespace="http://schemas.systematic.com/2011/products/command-layer-definition-v1"
+           elementFormDefault="qualified"
+           xmlns="http://schemas.systematic.com/2011/products/command-layer-definition-v1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:lyr="http://schemas.systematic.com/2011/products/layer-definition-v4"
+        >
+  <!-- Import the layer and symbol types -->
+  <xs:import namespace="http://schemas.systematic.com/2011/products/layer-definition-v4"
+             schemaLocation="LayerSchema.xsd"/>
+
+  <!-- Type definitions -->
+
+  <xs:element name="CommandLayer">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="lyr:Layer">
+          <xs:sequence>
+            <xs:element name="LastModified" minOccurs="1" maxOccurs="1" type="xs:dateTime"/>
+            <xs:element name="CallSign" minOccurs="1" maxOccurs="1" type="lyr:CallSign"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

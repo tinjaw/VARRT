@@ -1,0 +1,524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PlanSchema"
+           targetNamespace="http://schemas.systematic.com/2011/products/plan-definition-v2"
+           elementFormDefault="qualified"
+           xmlns="http://schemas.systematic.com/2011/products/plan-definition-v2"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:lyr="http://schemas.systematic.com/2011/products/layer-definition-v4"
+>
+    <!-- Import the layer and symbol types -->
+    <xs:import namespace="http://schemas.systematic.com/2011/products/layer-definition-v4"
+               schemaLocation="LayerSchema.xsd"/>
+
+    <!--Schema for SitaWare 5.5-->
+    <!-- Type definitions -->
+    <xs:element name="Plan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                <xs:element name="LastModified" minOccurs="1" maxOccurs="1" type="xs:dateTime"/>
+                <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" type="lyr:ArrayOfCustomAttributes"/>
+                <xs:element name="AuthorisationStatus" minOccurs="0" maxOccurs="1" type="AuthorisationStatus"/>
+                <xs:element name="DevelopmentState" minOccurs="0" maxOccurs="1" type="lyr:DevelopmentState" />
+                <xs:element name="ExecutionStatus" minOccurs="0" maxOccurs="1" type="ExecutionStatus"/>
+                <xs:element name="MessageReferenceNumber" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="Nickname" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="OtherFunctionalCommand" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="PlaceOfIssue" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="PlanLog" minOccurs="0" maxOccurs="1" type="PlanLog"/>
+                <xs:element name="References" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="SecurityClassification" minOccurs="0" maxOccurs="1" type="lyr:SecurityClassification"
+                            default="Null"/>
+                <xs:element name="SerialNumber" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="IssuingHeadquarter" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="TimeZone" minOccurs="0" maxOccurs="1" type="TimeZone" />
+                <xs:element name="Type" minOccurs="0" maxOccurs="1" type="OrderType" />
+                <xs:element name="TypeOfOperation" minOccurs="0" maxOccurs="1" type="xs:string" default="Unknown"/>
+                <xs:element name="AreaOfOperation" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                <xs:element name="Owner" minOccurs="1" maxOccurs="1" type="Owner"/>
+                <xs:element name="TaskOrganisation" minOccurs="0" maxOccurs="1" type="TaskOrganisation"/>
+                <xs:element name="MainPart" minOccurs="0" maxOccurs="1" type="Document"/>
+                <xs:element name="PlanElements" minOccurs="0" maxOccurs="1" type="ArrayOfPlanElement"/>
+                <xs:element name="Id" minOccurs="0" maxOccurs="1" nillable="false" type="lyr:Id"/>
+                <xs:element name="Timestamp" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+                <xs:element name="Extension" type="PlanExtensionPoint" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="ArrayOfPlanElement">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Document" type="Document" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="Overlay" type="lyr:PlanLayer" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ParagraphDevelopmentState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Complete"/>
+            <xs:enumeration value="InProgress"/>
+            <xs:enumeration value="NotComplete"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Paragraph">
+        <xs:sequence>
+            <xs:element name="DevelopmentState" minOccurs="0" maxOccurs="1" type="ParagraphDevelopmentState" />
+            <xs:element name="Text" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" type="lyr:ArrayOfCustomAttributes"/>
+            <!--A paragraph can reference a PlanOverlay -->
+            <xs:element name="PlanOverlayReferenceId" minOccurs="0" maxOccurs="1" type="lyr:Id"/>
+
+            <!-- A paragraph can itself contain paragraphs-->
+            <xs:element name="SubParagraphs" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SubParagraph" type="Paragraph" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+
+            </xs:element>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="Title" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Document">
+        <xs:sequence>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" type="lyr:ArrayOfCustomAttributes"/>
+            <xs:element name="DevelopmentState" minOccurs="0" maxOccurs="1" type="lyr:DevelopmentState" />
+            <xs:element name="SecurityClassification" minOccurs="0" maxOccurs="1" type="lyr:SecurityClassification"
+                        default="Null"/>
+            <xs:element name="Paragraphs" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Paragraph" type="Paragraph" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Overlays" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Overlay" type="lyr:PlanLayer" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Extension" type="DocumentExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="PlanExtensionPoint">
+        <xs:sequence>
+            <xs:element name="ExtensionDescription" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="HourCode" minOccurs="0" maxOccurs="1" nillable="true" type="HourCode"/>
+            <xs:element name="ExpectedTime" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime"/>
+            <xs:element name="Tasks" minOccurs="0" maxOccurs="1" type="ArrayOfRootTask"/>
+            <xs:element name="TaskDevelopmentState" minOccurs="0" maxOccurs="1" type="lyr:DevelopmentState" />
+            <xs:element name="Extension" type="PlanSecurityClassificationExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PlanSecurityClassificationExtension">
+        <xs:sequence>
+            <xs:element name="ExtensionDescription" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="SecurityClassificationPrefix" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="SecurityClassificationPostfix" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Extension" type="PlanDataExtensionsExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PlanDataExtensionsExtension">
+        <xs:sequence>
+            <xs:element name="DataExtensions" minOccurs="0" maxOccurs="unbounded" type="lyr:DataExtension"/>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DocumentExtension">
+        <xs:sequence>
+            <xs:element name="ExtensionDescription" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="SecurityClassificationPrefix" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="SecurityClassificationPostfix" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Extension" type="DocumentExtension2" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DocumentExtension2">
+        <xs:sequence>
+            <xs:element name="DataExtensions" minOccurs="0" maxOccurs="unbounded" type="lyr:DataExtension"/>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Task">
+        <xs:sequence>
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="DetailText" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="StartTime" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime"/>
+            <xs:element name="EndTime" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime"/>
+            <xs:element name="StartTimeQualifier" minOccurs="0" maxOccurs="1" nillable="true" type="StartQualifier"/>
+            <xs:element name="EndTimeQualifier" minOccurs="0" maxOccurs="1" nillable="true" type="EndQualifier"/>
+            <xs:element name="HourCode" minOccurs="0" maxOccurs="1" nillable="true" type="HourCode"/>
+            <xs:element name="StartHourCodeOffset" minOccurs="0" maxOccurs="1" nillable="true" type="xs:long"/>
+            <xs:element name="EndHourCodeOffset" minOccurs="0" maxOccurs="1" nillable="true" type="xs:long"/>
+            <!-- Sequence of symbol Ids that are referencing symbols placed on plan overlays associated with task -->
+            <xs:element name="Objectives" minOccurs="0" maxOccurs="1" type="ArrayOfId"/>
+            <!-- Sequence of taskOrganisationElement Ids or taskOrganisationElementRelationship Ids that are part of taskOrganisation in plan and associated with task -->
+            <xs:element name="Resources" minOccurs="0" maxOccurs="1" type="ArrayOfId"/>
+            <!-- Id of tacticalGraphic associated with the task, must be part of plan overlay within the plan task is part of-->
+            <xs:element name="TacticalGraphic" minOccurs="0" maxOccurs="1" nillable="true" type="lyr:Id"/>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" type="lyr:ArrayOfCustomAttributes"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RootTask">
+        <xs:complexContent>
+            <xs:extension base="Task">
+                <xs:sequence>
+                    <xs:element name="SubTasks" minOccurs="0" maxOccurs="1" type="ArrayOfSubTask"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SubTask">
+        <xs:complexContent>
+            <xs:extension base="Task">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ArrayOfId">
+        <xs:sequence>
+            <xs:element name="Id" minOccurs="0" maxOccurs="unbounded" type="lyr:Id"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ArrayOfSubTask">
+        <xs:sequence>
+            <xs:element name="SubTask" minOccurs="0" maxOccurs="unbounded" type="SubTask"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ArrayOfRootTask">
+        <xs:sequence>
+            <xs:element name="RootTask" minOccurs="0" maxOccurs="unbounded" type="RootTask"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="HourCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="K"/>
+            <xs:enumeration value="H"/>
+            <xs:enumeration value="L"/>
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value="F"/>
+            <xs:enumeration value="G"/>
+            <xs:enumeration value="P"/>
+            <xs:enumeration value="T"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StartQualifier">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AsSoonAsPossibleAfter"/>
+            <xs:enumeration value="NoLaterThan"/>
+            <xs:enumeration value="After"/>
+            <xs:enumeration value="ToBeDetermined"/>
+            <xs:enumeration value="AsSoonAsPossibleNotLaterThan"/>
+            <xs:enumeration value="AsSoonAsPossible"/>
+            <xs:enumeration value="NotBefore"/>
+            <xs:enumeration value="At"/>
+            <xs:enumeration value="Unknown"/>
+            <xs:enumeration value="Before"/>
+            <xs:enumeration value="OnCodeword"/>
+            <xs:enumeration value="OnCall"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EndQualifier">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AsSoonAsPossibleAfter"/>
+            <xs:enumeration value="NoLaterThan"/>
+            <xs:enumeration value="After"/>
+            <xs:enumeration value="AsSoonAsPossibleNotLaterThan"/>
+            <xs:enumeration value="AsSoonAsPossible"/>
+            <xs:enumeration value="Indefinite"/>
+            <xs:enumeration value="NotBefore"/>
+            <xs:enumeration value="At"/>
+            <xs:enumeration value="Unknown"/>
+            <xs:enumeration value="UntilFurtherNotice"/>
+            <xs:enumeration value="Before"/>
+            <xs:enumeration value="ToBeDetermined"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Owner">
+        <xs:sequence>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" type="lyr:ArrayOfCustomAttributes"/>
+            <xs:element name="FullyQualifiedName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="SymbolCode" minOccurs="0" maxOccurs="1" type="lyr:SymbolCode"/>
+            <xs:element name="Extension" type="OwnerExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OwnerExtension">
+        <xs:sequence>
+            <xs:element name="DataExtensions" type="lyr:DataExtension" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AuthorisationStatus">
+        <xs:sequence>
+            <xs:element name="Approver" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Comment" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="TimeOfApproval" minOccurs="0" maxOccurs="1" type="xs:dateTime"/>
+            <xs:element name="State" minOccurs="1" maxOccurs="1" type="State"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="State">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Approved"/>
+            <xs:enumeration value="Cancelled"/>
+            <xs:enumeration value="Editable"/>
+            <xs:enumeration value="LockedForApproval"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ExecutionState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Issued"/>
+            <xs:enumeration value="Stopped"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:complexType name="ExecutionStatus">
+        <xs:sequence>
+            <xs:element name="Approver" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Comment" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="IssuingHeadquarter" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="TimeOfIssue" minOccurs="0" maxOccurs="1" type="xs:dateTime"/>
+            <xs:element name="State" minOccurs="1" maxOccurs="1" type="ExecutionState"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PlanLog">
+        <xs:sequence>
+            <xs:element name="PlanLogEntry" type="PlanLogEntry" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PlanLogEntry">
+        <xs:sequence>
+            <xs:element name="ApproverName" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Comment" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="LogMessage" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Status" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="LogEntryTimestamp" type="xs:dateTime"/>
+    </xs:complexType>
+
+    <xs:simpleType name="TimeZone">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Alpha"/>
+            <xs:enumeration value="Bravo"/>
+            <xs:enumeration value="Charlie"/>
+            <xs:enumeration value="Delta"/>
+            <xs:enumeration value="Echo"/>
+            <xs:enumeration value="Foxtrot"/>
+            <xs:enumeration value="Glof"/>
+            <xs:enumeration value="Hotel"/>
+            <xs:enumeration value="India"/>
+            <xs:enumeration value="Kilo"/>
+            <xs:enumeration value="Lima"/>
+            <xs:enumeration value="Mike"/>
+            <xs:enumeration value="November"/>
+            <xs:enumeration value="Oscar"/>
+            <xs:enumeration value="Papa"/>
+            <xs:enumeration value="Quebec"/>
+            <xs:enumeration value="Romeo"/>
+            <xs:enumeration value="Sierra"/>
+            <xs:enumeration value="Tango"/>
+            <xs:enumeration value="Uniform"/>
+            <xs:enumeration value="Victor"/>
+            <xs:enumeration value="Whiskey"/>
+            <xs:enumeration value="Xray"/>
+            <xs:enumeration value="Yankee"/>
+            <xs:enumeration value="Zulu"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="OrderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AdministrativeLogisticsOrder"/>
+            <xs:enumeration value="FragmentaryOrder"/>
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+            <xs:enumeration value="OperationOrder"/>
+            <xs:enumeration value="WarningOrder"/>
+            <xs:enumeration value="OverlayOrder"/>
+            <xs:enumeration value="ContingencyPlan"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RelationshipType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OneWayAttachment"/>
+            <xs:enumeration value="OneWayDetachment"/>
+            <xs:enumeration value="TwoWayRelation"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CommandControlRelationship">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FullCommand"/>
+            <xs:enumeration value="OperationalCommand"/>
+            <xs:enumeration value="OperationalControl"/>
+            <xs:enumeration value="TacticalCommand"/>
+            <xs:enumeration value="TacticalControl"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TaskOrganisation">
+        <xs:sequence>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" type="lyr:ArrayOfCustomAttributes"/>
+            <xs:element name="DevelopmentState" minOccurs="0" maxOccurs="1" type="lyr:DevelopmentState" />
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Root" minOccurs="0" maxOccurs="1" type="TaskOrganisationElement"/>
+            <xs:element name="SecurityClassification" minOccurs="0" maxOccurs="1" type="lyr:SecurityClassification"
+                        default="Null"/>
+            <xs:element name="Extension" type="TaskOrganisationDataExtensionsExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TaskOrganisationDataExtensionsExtension">
+        <xs:sequence>
+            <xs:element name="DataExtensions" minOccurs="0" maxOccurs="unbounded" type="lyr:DataExtension"/>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TaskOrganisationElementRelationship">
+        <xs:sequence>
+            <xs:element name="ReducedName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="ReinforcedName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="CommandControlRelationship" minOccurs="0" maxOccurs="1" type="CommandControlRelationship" />
+            <xs:element name="Comment" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="RelationshipType" minOccurs="0" maxOccurs="1" type="RelationshipType"
+                        default="TwoWayRelation"/>
+            <xs:element name="Extension" type="TaskOrganisationElementRelationshipExtension" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Id" minOccurs="0" maxOccurs="1" nillable="false" type="lyr:Id"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TaskOrganisationElementRelationshipExtension">
+        <xs:sequence>
+            <xs:element name="SymbolCode" minOccurs="0" maxOccurs="1" type="lyr:SymbolCode"/>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AsymmetricAssignedRelationship">
+        <xs:complexContent>
+            <xs:extension base="TaskOrganisationElementRelationship">
+                <xs:sequence>
+                    <xs:element name="OrganisationStructureElement" minOccurs="1" maxOccurs="1"
+                                type="OrganisationStructureElement"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AssignedRelationship">
+        <xs:complexContent>
+            <xs:extension base="TaskOrganisationElementRelationship">
+                <xs:sequence>
+                    <xs:element name="TaskOrganisationElementReferenceId" minOccurs="1" maxOccurs="1" type="lyr:Id"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PlannedRelationship">
+        <xs:complexContent>
+            <xs:extension base="TaskOrganisationElementRelationship">
+                <xs:sequence>
+                    <xs:element name="SymbolCode" minOccurs="1" maxOccurs="1" type="lyr:SymbolCode"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="OrganisationStructureElement">
+        <xs:sequence>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" type="lyr:ArrayOfCustomAttributes"/>
+            <xs:element name="FullyQualifiedName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="SymbolCode" minOccurs="1" maxOccurs="1" type="lyr:SymbolCode"/>
+            <xs:element name="Extension" type="OrganisationStructureElementExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrganisationStructureElementExtension">
+        <xs:sequence>
+            <xs:element name="AbbreviatedName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Extension" type="OrganisationStructureElementExtension2" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrganisationStructureElementExtension2">
+        <xs:sequence>
+            <xs:element name="SymbolCode" minOccurs="0" maxOccurs="1" type="lyr:SymbolCode"/>
+            <xs:element name="Extension" type="OrganisationStructureElementExtension3" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrganisationStructureElementExtension3">
+        <xs:sequence>
+            <xs:element name="DataExtensions" minOccurs="0" maxOccurs="unbounded" type="lyr:DataExtension"/>
+            <xs:element name="Extension" type="lyr:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TaskOrganisationElement">
+        <xs:complexContent>
+            <xs:extension base="OrganisationStructureElement">
+                <xs:sequence>
+                    <xs:element name="ReductionRelationships" minOccurs="0" maxOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="ReductionRelationship" type="TaskOrganisationElementRelationship"
+                                            minOccurs="0" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ReinforcementRelationships" minOccurs="0" maxOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="ReinforcementRelationship" type="TaskOrganisationElementRelationship"
+                                            minOccurs="0" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SubordinateOrganisations" minOccurs="0" maxOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="Suborganisation" type="TaskOrganisationElement" minOccurs="0"
+                                            maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Id" minOccurs="0" maxOccurs="1" nillable="false" type="lyr:Id"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+</xs:schema>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Please look in the SitaWare SDK for more information about Holding Types -->
+<xs:schema id="HoldingTypeSchema"
+    targetNamespace="http://schemas.systematic.dk/2011/products/holdingType-definition-v2"
+    elementFormDefault="qualified"
+    xmlns="http://schemas.systematic.dk/2011/products/holdingType-definition-v2"
+    xmlns:mstns="http://schemas.systematic.dk/2011/products/holdingType-definition-v2"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+	<xs:element name="HoldingTypes" >
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HoldingType"  maxOccurs="unbounded" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="HoldingType" >
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string" />
+			<xs:attribute name="Category" type="xs:string" />
+			<xs:attribute name="Class" type="xs:string" />
+			<xs:attribute name="SubClass" type="xs:string" />
+			<xs:attribute name="SubSubClass" type="xs:string" />
+			<xs:attribute name="UnitOfMeasure" type="xs:string" />
+			<xs:attribute name="Height" type="xs:double" use="optional"/>
+			<xs:attribute name="Width" type="xs:double" use="optional"/>
+			<xs:attribute name="Length" type="xs:double" use="optional"/>
+			<xs:attribute name="LoadedWeight" type="xs:double" use="optional"/>
+			<xs:attribute name="UnloadedWeight" type="xs:double" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,1574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Please look in the SitaWare SDK for more information about Symbols and Layers -->
+<xs:schema xmlns:tns="http://schemas.systematic.com/2011/products/layer-definition-v4"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+           targetNamespace="http://schemas.systematic.com/2011/products/layer-definition-v4">
+    <xs:complexType name="Altitude">
+        <xs:sequence>
+            <xs:element name="Type" minOccurs="1" maxOccurs="1" type="tns:AltitudeType"/>
+            <xs:element name="Value" minOccurs="1" maxOccurs="1" type="xs:double"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="AltitudeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Undefined"/>
+            <xs:enumeration value="ChartDatum"/>
+            <xs:enumeration value="LocalDatum"/>
+            <xs:enumeration value="MeanSeaLevel"/>
+            <xs:enumeration value="PressureDatumQfe"/>
+            <xs:enumeration value="PressureDatumQnh"/>
+            <xs:enumeration value="PressureDatumStandardAtmosphere"/>
+            <xs:enumeration value="TopographicSurface"/>
+            <xs:enumeration value="WaterBottom"/>
+            <xs:enumeration value="Wgs84Geoid"/>
+            <xs:enumeration value="Wgs84ReferenceEllipsoid"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EnemyActivity">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="Cold"/>
+            <xs:enumeration value="Hot"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GeopoliticalAffiliation">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Unknown"/>
+            <xs:enumeration value="Afghanistan"/>
+            <xs:enumeration value="Albania"/>
+            <xs:enumeration value="Algeria"/>
+            <xs:enumeration value="AmericanSamoa"/>
+            <xs:enumeration value="Andorra"/>
+            <xs:enumeration value="Angola"/>
+            <xs:enumeration value="Anguilla"/>
+            <xs:enumeration value="Antarctica"/>
+            <xs:enumeration value="AntiguaAndBarbuda"/>
+            <xs:enumeration value="Argentina"/>
+            <xs:enumeration value="Armenia"/>
+            <xs:enumeration value="Aruba"/>
+            <xs:enumeration value="Australia"/>
+            <xs:enumeration value="Austria"/>
+            <xs:enumeration value="Azerbaijan"/>
+            <xs:enumeration value="Bahamas"/>
+            <xs:enumeration value="Bahrain"/>
+            <xs:enumeration value="Bangladesh"/>
+            <xs:enumeration value="Barbados"/>
+            <xs:enumeration value="Belarus"/>
+            <xs:enumeration value="Belgium"/>
+            <xs:enumeration value="Belize"/>
+            <xs:enumeration value="Benin"/>
+            <xs:enumeration value="Bermuda"/>
+            <xs:enumeration value="Bhutan"/>
+            <xs:enumeration value="Bolivia"/>
+            <xs:enumeration value="BosniaAndHerzegovina"/>
+            <xs:enumeration value="Botswana"/>
+            <xs:enumeration value="BouvetIsland"/>
+            <xs:enumeration value="Brazil"/>
+            <xs:enumeration value="BritishIndianOceanTerritory"/>
+            <xs:enumeration value="BruneiDarussalam"/>
+            <xs:enumeration value="Bulgaria"/>
+            <xs:enumeration value="BurkinaFaso"/>
+            <xs:enumeration value="Burundi"/>
+            <xs:enumeration value="Cambodia"/>
+            <xs:enumeration value="Cameroon"/>
+            <xs:enumeration value="Canada"/>
+            <xs:enumeration value="CapeVerde"/>
+            <xs:enumeration value="CaymanIslands"/>
+            <xs:enumeration value="CentralAfricanRepublic"/>
+            <xs:enumeration value="Chad"/>
+            <xs:enumeration value="Chile"/>
+            <xs:enumeration value="China"/>
+            <xs:enumeration value="ChristmasIsland"/>
+            <xs:enumeration value="CocosKeelingIslands"/>
+            <xs:enumeration value="Colombia"/>
+            <xs:enumeration value="Comoros"/>
+            <xs:enumeration value="Congo"/>
+            <xs:enumeration value="CongoCommaDemocraticRepublicOfThe"/>
+            <xs:enumeration value="CookIslands"/>
+            <xs:enumeration value="CostaRica"/>
+            <xs:enumeration value="CoteDIvoire"/>
+            <xs:enumeration value="Croatia"/>
+            <xs:enumeration value="Cuba"/>
+            <xs:enumeration value="Cyprus"/>
+            <xs:enumeration value="CzechAndSlovakFederativeRepublicFormer"/>
+            <xs:enumeration value="CzechRepublic"/>
+            <xs:enumeration value="Denmark"/>
+            <xs:enumeration value="Djibouti"/>
+            <xs:enumeration value="Dominica"/>
+            <xs:enumeration value="DominicanRepublic"/>
+            <xs:enumeration value="Ecuador"/>
+            <xs:enumeration value="Egypt"/>
+            <xs:enumeration value="ElSalvador"/>
+            <xs:enumeration value="EquatorialGuinea"/>
+            <xs:enumeration value="Eritrea"/>
+            <xs:enumeration value="Estonia"/>
+            <xs:enumeration value="Ethiopia"/>
+            <xs:enumeration value="FalklandIslandsMalvinas"/>
+            <xs:enumeration value="FaroeIslands"/>
+            <xs:enumeration value="Fiji"/>
+            <xs:enumeration value="Finland"/>
+            <xs:enumeration value="France"/>
+            <xs:enumeration value="FranceCommaMetropolitanFormer"/>
+            <xs:enumeration value="FrenchGuiana"/>
+            <xs:enumeration value="FrenchPolynesia"/>
+            <xs:enumeration value="FrenchSouthernTerritories"/>
+            <xs:enumeration value="Gabon"/>
+            <xs:enumeration value="Gambia"/>
+            <xs:enumeration value="Georgia"/>
+            <xs:enumeration value="GermanDemocraticRepublicFormer"/>
+            <xs:enumeration value="Germany"/>
+            <xs:enumeration value="Ghana"/>
+            <xs:enumeration value="Gibraltar"/>
+            <xs:enumeration value="Greece"/>
+            <xs:enumeration value="Greenland"/>
+            <xs:enumeration value="Grenada"/>
+            <xs:enumeration value="Guadeloupe"/>
+            <xs:enumeration value="Guam"/>
+            <xs:enumeration value="Guatemala"/>
+            <xs:enumeration value="Guernsey"/>
+            <xs:enumeration value="Guinea"/>
+            <xs:enumeration value="GuineaBissau"/>
+            <xs:enumeration value="Guyana"/>
+            <xs:enumeration value="Haiti"/>
+            <xs:enumeration value="HeardAndMcdonaldIslands"/>
+            <xs:enumeration value="HolySeeVaticanCityState"/>
+            <xs:enumeration value="Honduras"/>
+            <xs:enumeration value="HongKong"/>
+            <xs:enumeration value="Hungary"/>
+            <xs:enumeration value="Iceland"/>
+            <xs:enumeration value="India"/>
+            <xs:enumeration value="Indonesia"/>
+            <xs:enumeration value="IranCommaIslamicRepublicOf"/>
+            <xs:enumeration value="Iraq"/>
+            <xs:enumeration value="Ireland"/>
+            <xs:enumeration value="IsleOfMan"/>
+            <xs:enumeration value="Israel"/>
+            <xs:enumeration value="Italy"/>
+            <xs:enumeration value="Jamaica"/>
+            <xs:enumeration value="Japan"/>
+            <xs:enumeration value="Jersey"/>
+            <xs:enumeration value="Jordan"/>
+            <xs:enumeration value="Kazakhstan"/>
+            <xs:enumeration value="Kenya"/>
+            <xs:enumeration value="Kiribati"/>
+            <xs:enumeration value="KoreaCommaDemocraticPeopleSRepublicOf"/>
+            <xs:enumeration value="KoreaCommaRepublicOf"/>
+            <xs:enumeration value="Kuwait"/>
+            <xs:enumeration value="Kyrgyzstan"/>
+            <xs:enumeration value="LaoPeopleSDemocraticRepublic"/>
+            <xs:enumeration value="Latvia"/>
+            <xs:enumeration value="Lebanon"/>
+            <xs:enumeration value="Lesotho"/>
+            <xs:enumeration value="Liberia"/>
+            <xs:enumeration value="LibyanArabJamahiriya"/>
+            <xs:enumeration value="Liechtenstein"/>
+            <xs:enumeration value="Lithuania"/>
+            <xs:enumeration value="Luxembourg"/>
+            <xs:enumeration value="Macao"/>
+            <xs:enumeration value="MacedoniaCommaTheFormerYugoslavRepublicOf"/>
+            <xs:enumeration value="Madagascar"/>
+            <xs:enumeration value="Malawi"/>
+            <xs:enumeration value="Malaysia"/>
+            <xs:enumeration value="Maldives"/>
+            <xs:enumeration value="Mali"/>
+            <xs:enumeration value="Malta"/>
+            <xs:enumeration value="MarshallIslands"/>
+            <xs:enumeration value="Martinique"/>
+            <xs:enumeration value="Mauritania"/>
+            <xs:enumeration value="Mauritius"/>
+            <xs:enumeration value="Mayotte"/>
+            <xs:enumeration value="Mexico"/>
+            <xs:enumeration value="MicronesiaFederatedStatesOf"/>
+            <xs:enumeration value="MoldovaCommaRepublicOf"/>
+            <xs:enumeration value="Monaco"/>
+            <xs:enumeration value="Mongolia"/>
+            <xs:enumeration value="Montenegro"/>
+            <xs:enumeration value="Montserrat"/>
+            <xs:enumeration value="Morocco"/>
+            <xs:enumeration value="Mozambique"/>
+            <xs:enumeration value="Myanmar"/>
+            <xs:enumeration value="Namibia"/>
+            <xs:enumeration value="Nauru"/>
+            <xs:enumeration value="Nepal"/>
+            <xs:enumeration value="Netherlands"/>
+            <xs:enumeration value="NetherlandsAntilles"/>
+            <xs:enumeration value="NewCaledonia"/>
+            <xs:enumeration value="NewZealand"/>
+            <xs:enumeration value="Nicaragua"/>
+            <xs:enumeration value="Niger"/>
+            <xs:enumeration value="Nigeria"/>
+            <xs:enumeration value="Niue"/>
+            <xs:enumeration value="NorfolkIsland"/>
+            <xs:enumeration value="NorthernMarianaIslands"/>
+            <xs:enumeration value="Norway"/>
+            <xs:enumeration value="Oman"/>
+            <xs:enumeration value="Pakistan"/>
+            <xs:enumeration value="Palau"/>
+            <xs:enumeration value="PalestinianTerritoryCommaOccupied"/>
+            <xs:enumeration value="Panama"/>
+            <xs:enumeration value="PapuaNewGuinea"/>
+            <xs:enumeration value="Paraguay"/>
+            <xs:enumeration value="Peru"/>
+            <xs:enumeration value="Philippines"/>
+            <xs:enumeration value="Pitcairn"/>
+            <xs:enumeration value="Poland"/>
+            <xs:enumeration value="Portugal"/>
+            <xs:enumeration value="PuertoRico"/>
+            <xs:enumeration value="Qatar"/>
+            <xs:enumeration value="Reunion"/>
+            <xs:enumeration value="Romania"/>
+            <xs:enumeration value="RussianFederation"/>
+            <xs:enumeration value="Rwanda"/>
+            <xs:enumeration value="SaintHelena"/>
+            <xs:enumeration value="SaintKittsAndNevis"/>
+            <xs:enumeration value="SaintLucia"/>
+            <xs:enumeration value="SaintPierreAndMiquelon"/>
+            <xs:enumeration value="SaintVincentAndTheGrenadines"/>
+            <xs:enumeration value="Samoa"/>
+            <xs:enumeration value="SanMarino"/>
+            <xs:enumeration value="SaoTomeAndPrincipe"/>
+            <xs:enumeration value="SaudiArabia"/>
+            <xs:enumeration value="Senegal"/>
+            <xs:enumeration value="Serbia"/>
+            <xs:enumeration value="SerbiaAndMontenegroFormer"/>
+            <xs:enumeration value="Seychelles"/>
+            <xs:enumeration value="SierraLeone"/>
+            <xs:enumeration value="Singapore"/>
+            <xs:enumeration value="Slovakia"/>
+            <xs:enumeration value="Slovenia"/>
+            <xs:enumeration value="SolomonIslands"/>
+            <xs:enumeration value="Somalia"/>
+            <xs:enumeration value="SouthAfrica"/>
+            <xs:enumeration value="SouthGeorgiaAndTheSouthSandwichIslands"/>
+            <xs:enumeration value="Spain"/>
+            <xs:enumeration value="SriLanka"/>
+            <xs:enumeration value="Sudan"/>
+            <xs:enumeration value="Suriname"/>
+            <xs:enumeration value="SvalbardAndJanMayenIslands"/>
+            <xs:enumeration value="Swaziland"/>
+            <xs:enumeration value="Sweden"/>
+            <xs:enumeration value="Switzerland"/>
+            <xs:enumeration value="SyrianArabRepublic"/>
+            <xs:enumeration value="TaiwanCommaProvinceOfChina"/>
+            <xs:enumeration value="Tajikistan"/>
+            <xs:enumeration value="TanzaniaCommaUnitedRepublicOf"/>
+            <xs:enumeration value="Thailand"/>
+            <xs:enumeration value="TimorLeste"/>
+            <xs:enumeration value="Togo"/>
+            <xs:enumeration value="Tokelau"/>
+            <xs:enumeration value="Tonga"/>
+            <xs:enumeration value="TrinidadAndTobago"/>
+            <xs:enumeration value="Tunisia"/>
+            <xs:enumeration value="Turkey"/>
+            <xs:enumeration value="Turkmenistan"/>
+            <xs:enumeration value="TurksAndCaicosIslands"/>
+            <xs:enumeration value="Tuvalu"/>
+            <xs:enumeration value="Uganda"/>
+            <xs:enumeration value="Ukraine"/>
+            <xs:enumeration value="UnionOfSovietSocialistRepublicsFormer"/>
+            <xs:enumeration value="UnitedArabEmirates"/>
+            <xs:enumeration value="UnitedKingdom"/>
+            <xs:enumeration value="UnitedStates"/>
+            <xs:enumeration value="UnitedStatesMinorOutlyingIslands"/>
+            <xs:enumeration value="Uruguay"/>
+            <xs:enumeration value="Uzbekistan"/>
+            <xs:enumeration value="Vanuatu"/>
+            <xs:enumeration value="Venezuela"/>
+            <xs:enumeration value="VietNam"/>
+            <xs:enumeration value="VirginIslandsCommaBritish"/>
+            <xs:enumeration value="VirginIslandsCommaUPointsPoint"/>
+            <xs:enumeration value="WallisAndFutunaIslands"/>
+            <xs:enumeration value="WesternSahara"/>
+            <xs:enumeration value="Yemen"/>
+            <xs:enumeration value="YugoslaviaFormer"/>
+            <xs:enumeration value="Zambia"/>
+            <xs:enumeration value="Zimbabwe"/>
+            <xs:enumeration value="ÅlandIslands"/>
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InformationCredibility">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="Confirmed"/>
+            <xs:enumeration value="Probable"/>
+            <xs:enumeration value="Possible"/>
+            <xs:enumeration value="Doubtful"/>
+            <xs:enumeration value="Improbable"/>
+            <xs:enumeration value="TruthCannotBeJudged"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InformationReliability">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="CompletelyReliable"/>
+            <xs:enumeration value="UsuallyReliable"/>
+            <xs:enumeration value="FairlyReliable"/>
+            <xs:enumeration value="NotUsuallyReliable"/>
+            <xs:enumeration value="Unreliable"/>
+            <xs:enumeration value="ReliabilityCannotBeJudged"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MinefieldContent">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+            <xs:enumeration value="Antitank"/>
+            <xs:enumeration value="Antipersonnel"/>
+            <xs:enumeration value="Mixed"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MinefieldPattern">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="Regular"/>
+            <xs:enumeration value="Scattered"/>
+            <xs:enumeration value="Thickened"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MinePresence">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotSet"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="No"/>
+            <xs:enumeration value="Yes"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OccupationProgramIndicator">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="No"/>
+            <xs:enumeration value="Yes"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OperationalStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Operational"/>
+            <xs:enumeration value="MarginallyOperational"/>
+            <xs:enumeration value="NotOperational"/>
+            <xs:enumeration value="SubstantiallyOperational"/>
+            <xs:enumeration value="TemporarilyNotOperational"/>
+            <xs:enumeration value="NotKnown"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReserveIndicator">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="No"/>
+            <xs:enumeration value="Yes"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SecurityClassification">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="Unmarked"/>
+            <xs:enumeration value="Unclassified"/>
+            <xs:enumeration value="Restricted"/>
+            <xs:enumeration value="Confidential"/>
+            <xs:enumeration value="Secret"/>
+            <xs:enumeration value="TopSecret"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SecurityStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Secured"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="Guarded"/>
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="NotSpecified"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusQualifierEquipment">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Destroyed"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="InMaintenance"/>
+            <xs:enumeration value="HeavilyDamaged"/>
+            <xs:enumeration value="Immobilized"/>
+            <xs:enumeration value="IntactButUnrecoverable"/>
+            <xs:enumeration value="LackingVitalResources"/>
+            <xs:enumeration value="Mothballed"/>
+            <xs:enumeration value="Scrapped"/>
+            <xs:enumeration value="Denied"/>
+            <xs:enumeration value="Disassembled"/>
+            <xs:enumeration value="Lost"/>
+            <xs:enumeration value="ModeratelyDamaged"/>
+            <xs:enumeration value="Cleared"/>
+            <xs:enumeration value="LightlyDamaged"/>
+            <xs:enumeration value="None"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusQualifierInstallation">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Passable"/>
+            <xs:enumeration value="PartlyDismantled"/>
+            <xs:enumeration value="InMaintenance"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="Marked"/>
+            <xs:enumeration value="Denied"/>
+            <xs:enumeration value="Disassembled"/>
+            <xs:enumeration value="HeavilyDamaged"/>
+            <xs:enumeration value="LackingVitalResources"/>
+            <xs:enumeration value="PreparedForExecution"/>
+            <xs:enumeration value="UnderConstruction"/>
+            <xs:enumeration value="BurnedOut"/>
+            <xs:enumeration value="LightlyDamaged"/>
+            <xs:enumeration value="Destroyed"/>
+            <xs:enumeration value="CoveredByFire"/>
+            <xs:enumeration value="Lost"/>
+            <xs:enumeration value="Breached"/>
+            <xs:enumeration value="ModeratelyDamaged"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusQualifierOrganisation">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Destroyed"/>
+            <xs:enumeration value="HeavilyDamaged"/>
+            <xs:enumeration value="LackingVitalResources"/>
+            <xs:enumeration value="LightlyDamaged"/>
+            <xs:enumeration value="Lost"/>
+            <xs:enumeration value="ModeratelyDamaged"/>
+            <xs:enumeration value="NotKnown"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UsageStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Activated"/>
+            <xs:enumeration value="Deactivated"/>
+            <xs:enumeration value="NotKnown"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="Location" abstract="true">
+        <xs:sequence>
+            <xs:element name="Extension" type="tns:LocationExtensionPoint1" minOccurs="0" maxOccurs="1"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LocationExtensionPoint1">
+        <xs:sequence>
+            <xs:element name="Width" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="Length" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="Attitude" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Area">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Points" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ArrayOfPoint"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ArrayOfPoint">
+        <xs:sequence>
+            <xs:element name="Point" minOccurs="1" maxOccurs="unbounded" nillable="false" type="tns:Point"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Point">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Altitude" minOccurs="0" maxOccurs="1" nillable="false" type="tns:Altitude"/>
+                    <xs:element name="Latitude" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                    <xs:element name="Longitude" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Rectangle">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:TwoPointCorridor">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TwoPointCorridor">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Endpoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                    <xs:element name="StartPoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                    <xs:element name="Width" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Arrow">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Arrowhead" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                    <xs:element name="Points" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ArrayOfPoint"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TwoPointArrow">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Arrowhead" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                    <xs:element name="Endpoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                    <xs:element name="StartPoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Line">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Points" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ArrayOfPoint"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TwoPointLine">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Endpoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                    <xs:element name="StartPoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Circle">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="CenterPoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                    <xs:element name="PerimeterPoint" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Point"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PolyPoint">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Points" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ArrayOfPoint"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="FreehandDrawing">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Strokes" minOccurs="1" maxOccurs="unbounded" type="tns:Line"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="OperationalInformationGroupType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FriendlyAndNeutralOrganisational"/>
+            <xs:enumeration value="FriendlyAndNeutralNonOrganisational"/>
+            <xs:enumeration value="CorrelatedEnemyAndUnknown"/>
+            <xs:enumeration value="UncorrelatedEnemyAndUnknown"/>
+            <xs:enumeration value="GloballySignificant"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="EllipticShape">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Center" minOccurs="1" maxOccurs="1" type="tns:Point"/>
+                    <xs:element name="SemiMajor" minOccurs="1" maxOccurs="1" type="tns:Point"/>
+                    <xs:element name="SemiMinor" minOccurs="1" maxOccurs="1" type="tns:Point"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Ellipse">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:EllipticShape">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ArcEllipse">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:EllipticShape">
+                <xs:sequence>
+                    <xs:element name="StartBearing" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                    <xs:element name="EndBearing" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Sector">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Center" minOccurs="1" maxOccurs="1" type="tns:Point"/>
+                    <xs:element name="StartBearing" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                    <xs:element name="EndBearing" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                    <xs:element name="InnerRadius" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                    <xs:element name="OuterRadius" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PointListLocation">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Points" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ArrayOfPoint"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Corridor">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:PointListLocation">
+                <xs:sequence>
+                    <xs:element name="Width" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Symbol">
+        <xs:sequence>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" nillable="false"
+                        type="tns:ArrayOfCustomAttributes"/>
+            <xs:element name="GeopoliticalAffiliation" minOccurs="0" maxOccurs="1" type="tns:GeopoliticalAffiliation"
+                        default="Unknown"/>
+            <xs:element name="Location" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Location"/>
+            <xs:element name="Priority" minOccurs="0" maxOccurs="1" nillable="false" type="tns:Priority"/>
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="Report" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Report"/>
+            <xs:element name="SymbolCode" minOccurs="1" maxOccurs="1" nillable="false" type="tns:SymbolCode"/>
+            <xs:element name="Addresses" minOccurs="0" maxOccurs="1" nillable="false" type="tns:ArrayOfAddress"/>
+            <xs:element name="Aliases" minOccurs="0" maxOccurs="1" nillable="false" type="tns:ArrayOfAlias"/>
+            <xs:element name="StaffComments" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="Id" minOccurs="0" maxOccurs="1" nillable="false" type="tns:Id"/>
+            <xs:element name="Timestamp" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint" minOccurs="0" maxOccurs="1"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint">
+        <xs:sequence>
+            <xs:element name="IEDAttributes" type="tns:IEDAttributes" minOccurs="0" maxOccurs="1"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint2" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint2">
+        <xs:sequence>
+            <xs:element name="EffectiveFrom" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+            <xs:element name="EffectiveTo" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+            <xs:element name="IssuingAuthority" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element name="Altitude" minOccurs="0" maxOccurs="1" type="tns:Altitude"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint3" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint3">
+        <xs:sequence>
+            <xs:element name="FullyQualifiedName" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint4" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint4">
+        <xs:sequence>
+            <xs:element name="DeletedInMission" minOccurs="0" maxOccurs="1" nillable="false" type="xs:boolean"/>
+            <xs:element name="OriginalTimestamp" minOccurs="0" maxOccurs="1" nillable="false" type="xs:long"/>
+            <xs:element name="OwnerMissionId" minOccurs="0" maxOccurs="1" nillable="false" type="xs:int"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint5" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint5">
+        <xs:sequence>
+            <xs:element name="IsGuardZoneActive" minOccurs="0" type="xs:boolean"/>
+            <xs:element name="GuardZoneEffectiveFrom" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+            <xs:element name="GuardZoneEffectiveTo" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint6" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint6">
+        <xs:sequence>
+            <xs:element name="UpdatedLocation" minOccurs="0" maxOccurs="1" nillable="false" type="tns:Location"/>
+            <xs:element name="WeaponType" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="RangeFanCircular" minOccurs="0" maxOccurs="1" nillable="false" type="tns:RangeFanCircular"/>
+            <xs:element name="RangeFanSector" minOccurs="0" maxOccurs="1" nillable="false" type="tns:RangeFanSector"/>
+            <xs:element name="Direction" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="Quantity" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint7" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint7">
+        <xs:sequence>
+            <xs:element name="DataExtensions" minOccurs="0" maxOccurs="unbounded" type="tns:DataExtension"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:SymbolExtensionPoint8" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SymbolExtensionPoint8">
+        <xs:sequence>
+            <xs:element name="FourWhiskeyGrid" minOccurs="0" maxOccurs="1" type="tns:FourWhiskeyGrid"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IEDAttributes">
+        <xs:sequence>
+            <xs:element name="IntendedOutcome" type="tns:IntendedOutcome" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Emplacement" type="tns:Emplacement" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="EmploymentMethod" type="tns:EmploymentMethod" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="VehiclePlacement" type="tns:VehiclePlacement" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Suicide" type="tns:Suicide" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="UseSequence" type="tns:UseSequence" minOccurs="0" maxOccurs="1"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="IntendedOutcome">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AntiAirVehicle"/>
+            <xs:enumeration value="AntiArmour"/>
+            <xs:enumeration value="AntiInfrastructure"/>
+            <xs:enumeration value="AntiPersonnel"/>
+            <xs:enumeration value="TtpIdentification"/>
+            <xs:enumeration value="AntiVehicle"/>
+            <xs:enumeration value="AntiVessel"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Emplacement">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="InOn"/>
+            <xs:enumeration value="Overhead"/>
+            <xs:enumeration value="Subsurface"/>
+            <xs:enumeration value="Surface"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EmploymentMethod">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AirBorne"/>
+            <xs:enumeration value="AnimalBorne"/>
+            <xs:enumeration value="LargeVehicleBorne"/>
+            <xs:enumeration value="PersonBorne"/>
+            <xs:enumeration value="PostalPackageDelivery"/>
+            <xs:enumeration value="Projected"/>
+            <xs:enumeration value="MagneticAttachment"/>
+            <xs:enumeration value="NonMagneticAttachment"/>
+            <xs:enumeration value="Underbelly"/>
+            <xs:enumeration value="VehicleBorne"/>
+            <xs:enumeration value="VesselBorne"/>
+            <xs:enumeration value="WaterBorne"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="VehiclePlacement">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="No"/>
+            <xs:enumeration value="Yes"/>
+            <xs:enumeration value="NotKnown"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Suicide">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="No"/>
+            <xs:enumeration value="Yes"/>
+            <xs:enumeration value="NotKnown"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="UseSequence">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Primary"/>
+            <xs:enumeration value="Secondary"/>
+            <xs:enumeration value="Tertiary"/>
+            <xs:enumeration value="NotKnown"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ArrayOfAddress">
+        <xs:sequence>
+            <xs:element name="Address" minOccurs="1" maxOccurs="unbounded" nillable="false" type="tns:Address"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Address">
+        <xs:sequence>
+            <xs:element name="AddressType" minOccurs="0" maxOccurs="1" nillable="false" type="tns:AddressType"/>
+            <xs:element name="Text" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="AddressType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IdentificationFriendOrFoe"/>
+            <xs:enumeration value="VoiceService"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="ArrayOfAlias">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="AliasEntry" nillable="false" type="tns:Alias"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Alias">
+        <xs:sequence>
+            <xs:element name="AliasType" minOccurs="1" maxOccurs="1" nillable="false" type="tns:AliasType"/>
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="AliasType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AlternateName"/>
+            <xs:enumeration value="ElintNotation"/>
+            <xs:enumeration value="EmissionsSortingCode"/>
+            <xs:enumeration value="GeoLocation"/>
+            <xs:enumeration value="TrackIdentifier"/>
+            <xs:enumeration value="UnitDesignator"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Priority">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Medium"/>
+            <xs:enumeration value="Low"/>
+            <xs:enumeration value="High"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ServiceCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SpecialForce"/>
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="LocalMilitia"/>
+            <xs:enumeration value="Combined"/>
+            <xs:enumeration value="CoastGuard"/>
+            <xs:enumeration value="Navy"/>
+            <xs:enumeration value="Marines"/>
+            <xs:enumeration value="AirForce"/>
+            <xs:enumeration value="BorderGuard"/>
+            <xs:enumeration value="Paramilitary"/>
+            <xs:enumeration value="LocalDefenceForce"/>
+            <xs:enumeration value="Army"/>
+            <xs:enumeration value="CivilService"/>
+            <xs:enumeration value="Guerrilla"/>
+            <xs:enumeration value="TerritorialForce"/>
+            <xs:enumeration value="Joint"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AirfieldTypeUseCategory">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Limited"/>
+            <xs:enumeration value="Civil"/>
+            <xs:enumeration value="Military"/>
+            <xs:enumeration value="Joint"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="Airfield">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Installation">
+                <xs:sequence>
+                    <xs:element name="IcaoCode" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                    <xs:element name="AirfieldMainUseCategory" minOccurs="1" maxOccurs="1"
+                                type="tns:AirfieldTypeUseCategory"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Hospital">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Installation">
+                <xs:sequence>
+                    <xs:element name="NumberOfBeds" minOccurs="1" maxOccurs="1" type="xs:int"/>
+                    <xs:element name="OccupiedBeds" minOccurs="1" maxOccurs="1" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ArrayOfCustomAttributes">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="CustomAttributeEntry" nillable="false"
+                        type="tns:CustomAttributeEntry"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CustomAttributeEntry">
+        <xs:sequence>
+            <xs:element name="Key" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="Value" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DataExtension">
+        <xs:simpleContent>
+            <xs:extension base="xs:base64Binary">
+                <xs:attribute name="key" type="xs:short"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="CallSign">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="64"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="Report">
+        <xs:sequence>
+            <xs:element name="Comment" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="Credibility" minOccurs="0" maxOccurs="1" type="tns:InformationCredibility"
+                        default="Null"/>
+            <xs:element name="Reliability" minOccurs="0" maxOccurs="1" type="tns:InformationReliability"
+                        default="Null"/>
+            <xs:element name="Reported" minOccurs="1" maxOccurs="1" type="xs:dateTime"/>
+            <xs:element name="ReportingOrganisation" minOccurs="0" maxOccurs="1" nillable="false" type="tns:CallSign"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SymbolCode">
+        <xs:sequence>
+            <xs:element name="SymbolCodeString" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="SubtypeSymbolCodeString" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Incident">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Symbol">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="RGBColor">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="#([0-9A-Fa-f]){6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FloatUnitRange">
+        <xs:restriction base="xs:float">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PxLength">
+        <xs:restriction base="xs:float">
+            <xs:annotation>
+                <xs:documentation>Length in pixels</xs:documentation>
+            </xs:annotation>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="GenericShape">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Symbol">
+                <xs:sequence/>
+                <xs:attribute name="Stroke" type="tns:RGBColor"/>
+                <xs:attribute name="StrokeOpacity" type="tns:FloatUnitRange" default="1"/>
+                <xs:attribute name="StrokeWidth" type="tns:PxLength" default="1"/>
+                <xs:attribute name="StrokeLineCap" default="butt">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="butt"/>
+                            <xs:enumeration value="round"/>
+                            <xs:enumeration value="square"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="StrokeLineJoin" default="miter">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="miter"/>
+                            <xs:enumeration value="round"/>
+                            <xs:enumeration value="bevel"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="StrokeMiterLimit" default="4">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:float">
+                            <xs:minInclusive value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="StrokeDashArray">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>Must be comma separated, unit is pixels</xs:documentation>
+                            </xs:annotation>
+                            <xs:pattern value="[1-9][0-9]*(,[1-9][0-9]*)*"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="StrokeDashOffset" type="tns:PxLength"/>
+                <xs:attribute name="Fill" type="tns:RGBColor"/>
+                <xs:attribute name="FillOpacity" type="tns:FloatUnitRange" default="1"/>
+                <xs:attribute name="FontColor" type="tns:RGBColor" default="#000000"/>
+                <xs:attribute name="FontOpacity" type="xs:float" default="1"/>
+                <xs:attribute name="FontFamily" type="xs:string"/>
+                <xs:attribute name="FontStyle" default="normal">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="normal"/>
+                            <xs:enumeration value="italic"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="FontWeight" default="normal">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="normal"/>
+                            <xs:enumeration value="bold"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="FillPattern" default="none">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="solid"/>
+                            <xs:enumeration value="none"/>
+                            <xs:enumeration value="horizontal"/>
+                            <xs:enumeration value="vertical"/>
+                            <xs:enumeration value="forwarddiagonal"/>
+                            <xs:enumeration value="diagonalcross"/>
+                            <xs:enumeration value="backwarddiagonal"/>
+                            <xs:enumeration value="cross"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TacticalGraphic">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Symbol">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Minefield">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:TacticalGraphic">
+                <xs:sequence>
+                    <xs:element name="EndTime" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+                    <xs:element name="MinefieldContent" minOccurs="0" maxOccurs="1" type="tns:MinefieldContent"
+                                default="NotOtherwiseSpecified"/>
+                    <xs:element name="MinefieldPattern" minOccurs="0" maxOccurs="1" type="tns:MinefieldPattern"
+                                default="NotKnown"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BoundaryLine">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:TacticalGraphic">
+                <xs:sequence>
+                    <xs:element name="LeftOrganisation" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+                    <xs:element name="RightOrganisation" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BattlePosition">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:TacticalGraphic">
+                <xs:sequence>
+                    <xs:element name="Occupant" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Aviation">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:TacticalGraphic">
+                <xs:sequence>
+                    <xs:element name="StartTime" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+                    <xs:element name="EndTime" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+                    <xs:element name="MinHeight" minOccurs="0" maxOccurs="1" type="tns:Altitude"/>
+                    <xs:element name="MaxHeight" minOccurs="0" maxOccurs="1" type="tns:Altitude"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Installation">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Symbol">
+                <xs:sequence>
+                    <xs:element name="EnemyActivity" minOccurs="0" maxOccurs="1" type="tns:EnemyActivity"
+                                default="NotKnown"/>
+                    <xs:element name="MinePresence" minOccurs="0" maxOccurs="1" type="tns:MinePresence"
+                                default="NotSet"/>
+                    <xs:element name="OccupationProgramIndicator" minOccurs="0" maxOccurs="1"
+                                type="tns:OccupationProgramIndicator" default="NotKnown"/>
+                    <xs:element name="OperationalStatus" minOccurs="0" maxOccurs="1" type="tns:OperationalStatus"
+                                default="NotKnown"/>
+                    <xs:element name="ReserveIndicator" minOccurs="0" maxOccurs="1" type="tns:ReserveIndicator"
+                                default="NotKnown"/>
+                    <xs:element name="SecurityStatus" minOccurs="0" maxOccurs="1" type="tns:SecurityStatus"
+                                default="NotSpecified"/>
+                    <xs:element name="StatusQualifierInstallation" minOccurs="0" maxOccurs="1"
+                                type="tns:StatusQualifierInstallation" default="None"/>
+                    <xs:element name="UsageStatus" minOccurs="0" maxOccurs="1" type="tns:UsageStatus" default="None"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Unit">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Symbol">
+                <xs:sequence>
+                    <xs:element name="ServiceCode" minOccurs="0" maxOccurs="1" nillable="false" type="tns:ServiceCode"/>
+                    <xs:element name="AbbreviatedName" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+                    <xs:element name="Direction" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+                    <xs:element name="FullyQualifiedName" minOccurs="0" maxOccurs="1" nillable="false"
+                                type="xs:string"/>
+                    <xs:element name="OperationalStatus" minOccurs="0" maxOccurs="1" type="tns:OperationalStatus"
+                                default="NotKnown"/>
+                    <xs:element name="StatusQualifier" minOccurs="0" maxOccurs="1"
+                                type="tns:StatusQualifierOrganisation" default="None"/>
+                    <xs:element name="Reinforcement" minOccurs="0" maxOccurs="1" type="tns:Reinforcement"
+                                default="Null"/>
+                    <xs:element name="Speed" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="Reinforcement">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="NormalStrength"/>
+            <xs:enumeration value="DetachedOnly"/>
+            <xs:enumeration value="ReinforcedAndDetached"/>
+            <xs:enumeration value="ReinforcedOnly"/>
+            <xs:enumeration value="NotKnown"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="Equipment">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Symbol">
+                <xs:sequence>
+                    <xs:element name="Direction" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+                    <xs:element name="HullNumber" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+                    <xs:element name="OperationalStatus" minOccurs="0" maxOccurs="1" type="tns:OperationalStatus"
+                                default="NotKnown"/>
+                    <xs:element name="Speed" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+                    <xs:element name="StatusQualifier" minOccurs="0" maxOccurs="1" type="tns:StatusQualifierEquipment"
+                                default="None"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Meteorology">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Symbol">
+                <xs:sequence>
+                    <xs:element name="Interpretation" minOccurs="0" maxOccurs="1" type="tns:Interpretation"
+                                default="Null"/>
+                    <xs:element name="Probability" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                    <xs:element name="Source" minOccurs="0" maxOccurs="1" type="tns:Source" default="Null"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Atmosphere">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Meteorology">
+                <xs:sequence>
+                    <xs:element name="InversionLayer" minOccurs="0" maxOccurs="1" type="tns:InversionLayer"
+                                default="Null"/>
+                    <xs:element name="HumidityRatio" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                    <xs:element name="PressureQuantity" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                    <xs:element name="Temperature" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                    <xs:element name="TemperatureGradient" minOccurs="0" maxOccurs="1" type="tns:TemperatureGradient"
+                                default="NotKnown"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Icing">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Meteorology">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Precipitation">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Meteorology">
+                <xs:sequence>
+                    <xs:element name="Rate" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Visibility">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Meteorology">
+                <xs:sequence>
+                    <xs:element name="Direction" minOccurs="0" maxOccurs="1" type="tns:DiscreteDirection"
+                                default="Null"/>
+                    <xs:element name="Range" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Wind">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Meteorology">
+                <xs:sequence>
+                    <xs:element name="AirStability" minOccurs="0" maxOccurs="1" type="tns:AirStability" default="Null"/>
+                    <xs:element name="AltitudeLayer" minOccurs="0" maxOccurs="1" type="tns:AltitudeLayer"
+                                default="Null"/>
+                    <xs:element name="Direction" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                    <xs:element name="EffectiveDownwindDirection" minOccurs="0" maxOccurs="1" type="xs:double"
+                                default="0"/>
+                    <xs:element name="SpeedRate" minOccurs="0" maxOccurs="1" type="xs:double" default="0"/>
+                    <xs:element name="NuclearYieldQualifier" minOccurs="0" maxOccurs="1"
+                                type="tns:NuclearYieldQualifier" default="NotOtherwiseSpecified"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="Interpretation">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="AbsoluteMaximum"/>
+            <xs:enumeration value="AbsoluteMinimum"/>
+            <xs:enumeration value="AverageMaximum"/>
+            <xs:enumeration value="AverageMinimum"/>
+            <xs:enumeration value="Nominal"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Source">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="Forecast"/>
+            <xs:enumeration value="Observed"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InversionLayer">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="LowerThan800Metres"/>
+            <xs:enumeration value="LowerThan400Metres"/>
+            <xs:enumeration value="LowerThan200Metres"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TemperatureGradient">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="Neutral"/>
+            <xs:enumeration value="Stable"/>
+            <xs:enumeration value="Unstable"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DiscreteDirection">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="North"/>
+            <xs:enumeration value="NorthNortheast"/>
+            <xs:enumeration value="Northeast"/>
+            <xs:enumeration value="EastNortheast"/>
+            <xs:enumeration value="East"/>
+            <xs:enumeration value="EastSoutheast"/>
+            <xs:enumeration value="Southeast"/>
+            <xs:enumeration value="SouthSoutheast"/>
+            <xs:enumeration value="South"/>
+            <xs:enumeration value="SouthSouthwest"/>
+            <xs:enumeration value="Southwest"/>
+            <xs:enumeration value="WestSouthwest"/>
+            <xs:enumeration value="West"/>
+            <xs:enumeration value="WestNorthwest"/>
+            <xs:enumeration value="Northwest"/>
+            <xs:enumeration value="NorthNorthwest"/>
+            <xs:enumeration value="AllDirections"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AirStability">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="SimplifiedNeutral"/>
+            <xs:enumeration value="SimplifiedStable"/>
+            <xs:enumeration value="SimplifiedUnstable"/>
+            <xs:enumeration value="DetailedStable"/>
+            <xs:enumeration value="DetailedUnstable"/>
+            <xs:enumeration value="DetailedSlightlyUnstable"/>
+            <xs:enumeration value="DetailedSlightlyStable"/>
+            <xs:enumeration value="DetailedVeryStable"/>
+            <xs:enumeration value="DetailedVeryUnstable"/>
+            <xs:enumeration value="DetailedNeutral"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AltitudeLayer">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="M2000"/>
+            <xs:enumeration value="M4000"/>
+            <xs:enumeration value="M6000"/>
+            <xs:enumeration value="M8000"/>
+            <xs:enumeration value="M10000"/>
+            <xs:enumeration value="M12000"/>
+            <xs:enumeration value="M14000"/>
+            <xs:enumeration value="M16000"/>
+            <xs:enumeration value="M18000"/>
+            <xs:enumeration value="M20000"/>
+            <xs:enumeration value="M22000"/>
+            <xs:enumeration value="M24000"/>
+            <xs:enumeration value="M26000"/>
+            <xs:enumeration value="M28000"/>
+            <xs:enumeration value="M30000"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NuclearYieldQualifier">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotKnown"/>
+            <xs:enumeration value="Alfa"/>
+            <xs:enumeration value="Bravo"/>
+            <xs:enumeration value="Charlie"/>
+            <xs:enumeration value="Delta"/>
+            <xs:enumeration value="Echo"/>
+            <xs:enumeration value="Foxtrot"/>
+            <xs:enumeration value="Golf"/>
+            <xs:enumeration value="NotOtherwiseSpecified"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="LayerFileFormatRoot">
+        <xs:sequence>
+            <xs:element name="Layers" minOccurs="0" maxOccurs="1" nillable="false" type="tns:ArrayOfLayers"/>
+            <xs:element name="Version" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LayerFileFormatRoot" nillable="false" type="tns:LayerFileFormatRoot"/>
+    <xs:complexType name="ArrayOfLayers">
+        <xs:sequence>
+            <xs:element name="Layer" minOccurs="1" maxOccurs="unbounded" nillable="false" type="tns:Layer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PlanLayer">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Layer">
+                <xs:sequence>
+                    <xs:element name="DevelopmentState" minOccurs="0" maxOccurs="1" type="tns:DevelopmentState"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Layer">
+        <xs:sequence>
+            <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" nillable="false"
+                        type="tns:ArrayOfCustomAttributes"/>
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="SecurityClassification" minOccurs="0" maxOccurs="1" type="tns:SecurityClassification"
+                        default="Null"/>
+            <xs:element name="Symbols" minOccurs="1" maxOccurs="1" nillable="false" type="tns:ArrayOfSymbol"/>
+            <xs:element name="Id" minOccurs="0" maxOccurs="1" nillable="false" type="tns:Id"/>
+            <xs:element name="Timestamp" minOccurs="0" maxOccurs="1" nillable="false" type="xs:dateTime"/>
+            <xs:element name="Extension" type="tns:LayerSecurityClassificationExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LayerSecurityClassificationExtension">
+        <xs:sequence>
+            <xs:element name="ExtensionDescription" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="SecurityClassificationPrefix" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="SecurityClassificationPostfix" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Extension" type="tns:LayerDataExtensionsExtension" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LayerDataExtensionsExtension">
+        <xs:sequence>
+            <xs:element name="DataExtensions" minOccurs="0" maxOccurs="unbounded" type="tns:DataExtension"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ArrayOfSymbol">
+        <xs:sequence>
+            <xs:element name="Symbol" minOccurs="0" maxOccurs="unbounded" nillable="false" type="tns:Symbol"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SituationLayer">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Layer">
+                <xs:sequence>
+                    <xs:element name="Category" minOccurs="0" maxOccurs="1" nillable="false"
+                                type="tns:OperationalInformationGroupType"/>
+                    <xs:element name="Path" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="DevelopmentState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotComplete"/>
+            <xs:enumeration value="Complete"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="Id">
+        <xs:sequence>
+            <xs:element name="FirstLong" minOccurs="1" maxOccurs="1" nillable="false" type="xs:long"/>
+            <xs:element name="SecondLong" minOccurs="1" maxOccurs="1" nillable="false" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TextArea">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:GenericShape">
+                <xs:sequence>
+                    <xs:element name="Text" nillable="false" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="RouteLine">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Location">
+                <xs:sequence>
+                    <xs:element name="Points" minOccurs="1" maxOccurs="1" nillable="false"
+                                type="tns:ArrayOfRoutePoint"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ArrayOfRoutePoint">
+        <xs:sequence>
+            <xs:element name="Point" minOccurs="1" maxOccurs="unbounded" nillable="false" type="tns:RoutePoint"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RoutePoint">
+        <xs:sequence>
+            <xs:element name="Altitude" minOccurs="0" maxOccurs="1" nillable="false" type="tns:Altitude"/>
+            <xs:element name="Latitude" minOccurs="1" maxOccurs="1" type="xs:double"/>
+            <xs:element name="Longitude" minOccurs="1" maxOccurs="1" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Route">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:GenericShape">
+                <xs:sequence>
+                    <xs:element name="MarchSpeed" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="WayPointType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Follow Route"/>
+            <xs:enumeration value="Follow Suitable Road or Terrain"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="WayPoint">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:RoutePoint">
+                <xs:sequence>
+                    <xs:element name="WayPointName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                    <xs:element name="EstimatedArrivalTime" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                    <xs:element name="Comment" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                    <xs:element name="CustomAttributes" minOccurs="0" maxOccurs="1" nillable="false"
+                                type="tns:ArrayOfCustomAttributes"/>
+                    <xs:element name="Extension" type="tns:WayPointExtensionPoint" minOccurs="0" maxOccurs="1"/>
+                    <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+                </xs:sequence>
+                <xs:attribute name="WayPointType" default="Follow Route" type="tns:WayPointType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="WayPointExtensionPoint">
+        <xs:sequence>
+            <xs:element name="DataExtensions" type="tns:DataExtension" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element minOccurs="0" name="ExtraData" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:WayPointExtensionPoint2" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="WayPointExtensionPoint2">
+        <xs:sequence>
+            <xs:element name="ArrivalTime" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" minOccurs="0" maxOccurs="1" type="tns:ExtensionPoint"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Range">
+        <xs:sequence>
+            <xs:element name="Altitude" minOccurs="0" maxOccurs="1" nillable="false" type="tns:Altitude"/>
+            <xs:element name="Distance" minOccurs="1" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RangeArc">
+        <xs:sequence>
+            <xs:element name="Range" minOccurs="1" maxOccurs="1" nillable="false" type="tns:Range"/>
+            <xs:element name="StartAzimuth" minOccurs="1" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="EndAzimuth" minOccurs="1" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RangeFanCircular">
+        <xs:sequence>
+            <xs:element name="Range" minOccurs="1" maxOccurs="unbounded" nillable="false" type="tns:Range"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RangeFanSector">
+        <xs:sequence>
+            <xs:element name="RangeArc" minOccurs="1" maxOccurs="unbounded" nillable="false" type="tns:RangeArc"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FourWhiskeyGridAssignmentPair">
+        <xs:sequence>
+            <xs:element name="UnitName" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="Assignment" minOccurs="0" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FourWhiskeyGrid">
+        <xs:sequence>
+            <xs:element name="PimCell" minOccurs="1" maxOccurs="1" nillable="false" type="xs:string"/>
+            <xs:element name="NumberOfCells" minOccurs="0" maxOccurs="1" nillable="false" type="xs:int"/>
+            <xs:element name="CellSize" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="direction" minOccurs="0" maxOccurs="1" nillable="false" type="xs:double"/>
+            <xs:element name="UnitAssignmentsList" minOccurs="0" maxOccurs="unbounded" nillable="false" type="tns:FourWhiskeyGridAssignmentPair"/>
+            <xs:element name="ExtraData" minOccurs="0" type="xs:base64Binary"/>
+            <xs:element name="Extension" type="tns:ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ExtensionPoint">
+        <!-- Extension points should have an ExtensionDescription element containing a description of the extension.
+    This description will be presented to the user in FrontLine if the extension is not supported. -->
+        <xs:sequence>
+            <xs:any processContents="lax" minOccurs="1" maxOccurs="unbounded" namespace="##any"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

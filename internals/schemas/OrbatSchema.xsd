@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Please look in the SitaWare SDK for more information about ORBAT -->
+<xs:schema targetNamespace="http://schemas.systematic.dk/2011/products/orbat-definition-v4" elementFormDefault="qualified" xmlns="http://schemas.systematic.dk/2011/products/orbat-definition-v4" xmlns:mstns="http://schemas.systematic.dk/2011/products/orbat-definition-v4" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Orbat">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element maxOccurs="1" minOccurs="0" ref="Organisation"/>
+        <xs:element name="HoldingTypes" minOccurs="0" nillable="true" maxOccurs="1" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="HoldingType"  maxOccurs="unbounded" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomAttributes" nillable="true" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="CustomAttribute" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Extension" type="ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+      </xs:choice>
+      <xs:attribute name="ModificationTime" type="xs:dateTime" use="required"/>
+      <xs:attribute name="CreationTime" type="xs:dateTime" use="required"/>
+      <xs:attribute name="Name" type="xs:string" use="required" />
+      <xs:attribute name="Hostility" type="Hostility" use="required" />
+      <xs:attribute name="ParentRelationship" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Organisation">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="NominalHoldings" minOccurs="0" nillable="true" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" ref="NominalHoldingItem" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SubOrganisations" maxOccurs="1" minOccurs="0" nillable="true" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" ref="Organisation" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomAttributes" nillable="true" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="CustomAttribute" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Extension" type="ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+      </xs:choice>
+      <xs:attribute name="Name" type="xs:string" use="required"/>
+      <xs:attribute name="FullyQualifiedName" type="xs:string" use="required"/>
+      <xs:attribute name="SymbolCode" type="xs:string" use="required"/>
+      <xs:attribute name="SubSymbolCode" type="xs:string" use="required"/>
+      <xs:attribute name="AbbreviatedName" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NominalHoldingItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Extension" type="ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="HoldingTypeID" type="xs:int" use="required" />
+      <xs:attribute name="Quantity" type="xs:int" use="optional" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HoldingType" >
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Extension" type="ExtensionPoint" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="HoldingTypeID" type="xs:int" use="optional" />
+      <xs:attribute name="HoldingName" type="xs:string" use="optional" />
+      <xs:attribute name="HoldingCategory" type="xs:string" use="optional" />
+      <xs:attribute name="HoldingClass" type="xs:string" use="optional" />
+      <xs:attribute name="HoldingSubClass" type="xs:string" use="optional" />
+      <xs:attribute name="HoldingSubSubClass" type="xs:string" use="optional" />
+      <xs:attribute name="UnitOfMeasure" type="xs:string" use="optional" />
+      <xs:attribute name="Height" type="xs:double" use="optional"/>
+      <xs:attribute name="Width" type="xs:double" use="optional"/>
+      <xs:attribute name="Length" type="xs:double" use="optional"/>
+      <xs:attribute name="LoadedWeight" type="xs:double" use="optional"/>
+      <xs:attribute name="UnloadedWeight" type="xs:double" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="Hostility">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AssumedFriend" />
+      <xs:enumeration value="Friend" />
+      <xs:enumeration value="Hostile" />
+      <xs:enumeration value="Neutral" />
+      <xs:enumeration value="Faker" />
+      <xs:enumeration value="Joker" />
+      <xs:enumeration value="Pending" />
+      <xs:enumeration value="Suspect" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CustomAttribute" nillable="true">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Key" nillable="true" type="xs:string" minOccurs="1" maxOccurs="1">
+        </xs:element>
+        <xs:element name="Value" nillable="true" type="xs:string" minOccurs="1" maxOccurs="1">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="ExtensionPoint">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="1" maxOccurs="unbounded" namespace="##any"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
