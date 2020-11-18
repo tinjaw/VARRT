@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './Home.css';
-import { exportAsCSV, readJSONFile } from './varrt';
+import { exportAsCSV, exportAsSPL, readJSONFile } from './varrt';
 
 function getOnClick() {
   async function getClick() {
     const gameAsJSON = await readJSONFile();
     await exportAsCSV(gameAsJSON);
+    await exportAsSPL(gameAsJSON);
   }
   return getClick;
 }
