@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const xslx = require('json-as-xlsx');
 const { create } = require('xmlbuilder2');
+const dF = require('../date.format');
 
 // eslint-disable-next-line import/prefer-default-export
 export async function readJSONFile() {
@@ -43,6 +44,141 @@ export async function exportAsCSV(gameAsJSON: any) {
   xslx(columns, result, settings, download);
 }
 
+export async function exportAsSLF(gameAsJSON: string) {
+  const root = create({ version: '1.0', encoding: 'utf-8' }).ele(
+    'LayerFileFormatRoot'
+  );
+  // Create the first half of the document, up to the units/symbols
+  root
+    .att('xmlns:xsd', 'http://www.w3.org/2001/XMLSchema')
+    .att('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')
+    .att(
+      'xmlns',
+      'http://schemas.systematic.com/2011/products/layer-definition-v4'
+    )
+    .ele('Layers')
+    .ele('Layer')
+    .att('xsi:type', 'SituationLayer')
+    .ele('Name')
+    .txt('foo')
+    .up()
+    .ele('SecurityClassification')
+    .txt('Unmarked')
+    .up()
+    .ele('Symbols');
+
+  // Add each of the units/symbols
+  const expression = jsonata(
+    `\`Game Map\`.*.{
+"Location": {"Latitude": function($pixels) { 57.64451092 - $pixels * 0.000245657 }(CurrentX) ,
+"Longitude": function($pixels) { 22.9375029 + $pixels * 0.000388979 }(CurrentY)},
+"Priority": "Medium",
+"Name": BasicName,
+"Report": {"Comment": "" , "Reported": ""},
+"SymbolCode": {"SymbolCodeString": "SFGPU------****"},
+"StaffComments": "50%",
+"Id": {"FirstLong": 1234567890, "SecondLong": 9876543210},
+"AbbreviatedName": "",
+"OperationalStatus": "Operational"
+}`
+  );
+  const unitArray = expression.evaluate(gameAsJSON);
+  unitArray.forEach((unit: any) => {
+    root
+      .last()
+      .last()
+      .last()
+      .ele('Symbol')
+      .att('xsi:type', 'Unit')
+      .ele('Location')
+      .att('xsi:type', 'Point')
+      .ele('Latitude')
+      .txt(unit.Location.Latitude)
+      .up()
+      .ele('Longitude')
+      .txt(unit.Location.Longitude)
+      .up()
+      .up()
+      .ele('Priority')
+      .txt(unit.Priority)
+      .up()
+      .ele('Name')
+      .txt(unit.Name)
+      .up()
+      .ele('Report')
+      .ele('Comment')
+      .txt(unit.Comment)
+      .up()
+      .ele('Reported')
+      .txt(dF.dateFormat('isoUtcDateTime'))
+      .up()
+      .up()
+      .ele('SymbolCode')
+      .ele('SymbolCodeString')
+      .txt(unit.SymbolCode.SymbolCodeString)
+      .up()
+      .up()
+      .ele('StaffComments')
+      .txt(unit.StaffComments)
+      .up()
+      .ele('Id')
+      .ele('FirstLong')
+      .txt('5449758911549343075')
+      .up()
+      .ele('SecondLong')
+      .txt('1709749382916375198')
+      .up()
+      .up()
+      .ele('AbbreviatedName')
+      .txt(unit.AbbreviatedName)
+      .up()
+      .ele('OperationalStatus')
+      .txt(unit.OperationalStatus);
+  });
+
+  // Add the remaining elements of the document
+  root
+    .last()
+    .last()
+    .ele('Id', {
+      // eslint-disable-next-line
+      'xmlns': 'http://schemas.systematic.com/2011/products/layer-definition-v4'
+    })
+    .ele('FirstLong')
+    .txt('5114396779368620163')
+    .up()
+    .ele('SecondLong')
+    .txt('795819925434062993')
+    .up()
+    .up()
+    .ele('Extension', {
+      // eslint-disable-next-line
+      'xmlns': 'http://schemas.systematic.com/2011/products/layer-definition-v4'
+    })
+    .ele('ExtensionDescription')
+    .txt(
+      'This extension contains prefix and suffix for the security' +
+        ' classification for the plan layer'
+    )
+    .up()
+    .ele('SecurityClassificationPrefix')
+    .up()
+    .ele('SecurityClassificationPostfix')
+    .up()
+    .up()
+    .ele('Category')
+    .txt('GloballySignificant')
+    .up()
+    .ele('Path')
+    .up()
+    .up()
+    .up()
+    .ele('Version')
+    .txt('4');
+  const xml = root.end({ prettyPrint: true });
+  await promises.writeFile('LandPower.slf', xml);
+}
+
 export async function exportAsSPL(gameAsJSON: string) {
   const root = create({ version: '1.0', encoding: 'utf-8' }).ele('PlanLayer');
   root
@@ -67,7 +203,7 @@ export async function exportAsSPL(gameAsJSON: string) {
     .up()
     .ele('Name', {
       // eslint-disable-next-line
-      'xlsns':
+      'xmlns':
         'http://schemas.systematic.com/2011/products/layer-definition-v4'
     })
     .txt('OPSUM 09OCT1500Z2025')
@@ -84,14 +220,83 @@ export async function exportAsSPL(gameAsJSON: string) {
       'xmlns': 'http://schemas.systematic.com/2011/products/layer-definition-v4'
     });
 
+  // Add each of the units/symbols
+  const expression = jsonata(
+    `\`Game Map\`.*.{
+"Location": {"Latitude": function($pixels) { 57.64451092 - $pixels * 0.000245657 }(CurrentX) ,
+"Longitude": function($pixels) { 22.9375029 + $pixels * 0.000388979 }(CurrentY)},
+"Priority": "Medium",
+"Name": BasicName,
+"Report": {"Comment": "" , "Reported": ""},
+"SymbolCode": {"SymbolCodeString": "SFGPU------****"},
+"StaffComments": "50%",
+"Id": {"FirstLong": 1234567890, "SecondLong": 9876543210},
+"AbbreviatedName": "",
+"OperationalStatus": "Operational"
+}`
+  );
+  const unitArray = expression.evaluate(gameAsJSON);
+  unitArray.forEach((unit: any) => {
+    root
+      .last()
+      .ele('Symbol')
+      .att('xsi:type', 'Unit')
+      .ele('Location')
+      .att('xsi:type', 'Point')
+      .ele('Latitude')
+      .txt(unit.Location.Latitude)
+      .up()
+      .ele('Longitude')
+      .txt(unit.Location.Longitude)
+      .up()
+      .up()
+      .ele('Priority')
+      .txt(unit.Priority)
+      .up()
+      .ele('Name')
+      .txt(unit.Name)
+      .up()
+      .ele('Report')
+      .ele('Comment')
+      .txt(unit.Comment)
+      .up()
+      .ele('Reported')
+      .txt(dF.dateFormat('isoUtcDateTime'))
+      .up()
+      .up()
+      .ele('SymbolCode')
+      .ele('SymbolCodeString')
+      .txt(unit.SymbolCode.SymbolCodeString)
+      .up()
+      .up()
+      .ele('StaffComments')
+      .txt(unit.StaffComments)
+      .up()
+      .ele('Id')
+      .ele('FirstLong')
+      .txt('5449758911549343075')
+      .up()
+      .ele('SecondLong')
+      .txt('1709749382916375198')
+      .up()
+      .up()
+      .ele('AbbreviatedName')
+      .txt(unit.AbbreviatedName)
+      .up()
+      .ele('OperationalStatus')
+      .txt(unit.OperationalStatus);
+  });
+
   root
     .ele('Id', {
       // eslint-disable-next-line
       'xmlns': 'http://schemas.systematic.com/2011/products/layer-definition-v4'
     })
     .ele('FirstLong')
+    .txt('5449758911549343075')
     .up()
     .ele('SecondLong')
+    .txt('1709749382916375198')
     .up()
     .up()
     .ele('Extension', {
