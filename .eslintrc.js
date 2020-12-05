@@ -23,4 +23,7 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
   },
+  env: {
+    es2020: true,
+  },
 };
