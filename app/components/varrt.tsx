@@ -2,11 +2,27 @@ import { remote } from 'electron';
 import { promises } from 'fs';
 import jsonata from 'jsonata';
 import sha1 from 'sha1';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4, parse as uuidParse } from 'uuid';
 
 const xslx = require('json-as-xlsx');
 const { create } = require('xmlbuilder2');
 const dF = require('../date.format');
+
+function getMostSignificantBits(id) {
+  // First 64 bits => BigInt
+  console.log(uuidv4);
+  console.log(uuidParse); // returns undefined
+  return uuidParse(id)
+    .slice(0, 8)
+    .reduce((a, b) => (a << 8n) | BigInt(b), 0n);
+}
+
+function getLeastSignificantBits(id) {
+  // Last 64 bits => BigInt
+  return uuidParse(id)
+    .slice(8, 16)
+    .reduce((a, b) => (a << 8n) | BigInt(b), 0n);
+}
 
 // eslint-disable-next-line import/prefer-default-export
 export async function readJSONFile() {
@@ -77,13 +93,15 @@ export async function exportAsSLF(gameAsJSON: string) {
 "Report": {"Comment": "" , "Reported": ""},
 "SymbolCode": {"SymbolCodeString": "SFGPU------****"},
 "StaffComments": "50%",
-"Id": {"FirstLong": 1234567890, "SecondLong": 9876543210},
+"UUID": UUID,
 "AbbreviatedName": "",
 "OperationalStatus": "Operational"
 }`
   );
   const unitArray = expression.evaluate(gameAsJSON);
   unitArray.forEach((unit: any) => {
+    const msb = getMostSignificantBits(unit.UUID);
+    const lsb = getLeastSignificantBits(unit.UUID);
     root
       .last()
       .last()
@@ -123,10 +141,10 @@ export async function exportAsSLF(gameAsJSON: string) {
       .up()
       .ele('Id')
       .ele('FirstLong')
-      .txt('5449758911549343075')
+      .txt(msb)
       .up()
       .ele('SecondLong')
-      .txt('1709749382916375198')
+      .txt(lsb)
       .up()
       .up()
       .ele('AbbreviatedName')
@@ -135,6 +153,10 @@ export async function exportAsSLF(gameAsJSON: string) {
       .ele('OperationalStatus')
       .txt(unit.OperationalStatus);
   });
+
+  const splID = uuidv4();
+  const msb = getMostSignificantBits(splID);
+  const lsb = getLeastSignificantBits(splID);
 
   // Add the remaining elements of the document
   root
@@ -145,10 +167,10 @@ export async function exportAsSLF(gameAsJSON: string) {
       'xmlns': 'http://schemas.systematic.com/2011/products/layer-definition-v4'
     })
     .ele('FirstLong')
-    .txt('5114396779368620163')
+    .txt(msb)
     .up()
     .ele('SecondLong')
-    .txt('795819925434062993')
+    .txt(lsb)
     .up()
     .up()
     .ele('Extension', {
@@ -230,13 +252,15 @@ export async function exportAsSPL(gameAsJSON: string) {
 "Report": {"Comment": "" , "Reported": ""},
 "SymbolCode": {"SymbolCodeString": "SFGPU------****"},
 "StaffComments": "50%",
-"Id": {"FirstLong": 1234567890, "SecondLong": 9876543210},
+"UUID": UUID,
 "AbbreviatedName": "",
 "OperationalStatus": "Operational"
 }`
   );
   const unitArray = expression.evaluate(gameAsJSON);
   unitArray.forEach((unit: any) => {
+    const msb = getMostSignificantBits(unit.UUID);
+    const lsb = getLeastSignificantBits(unit.UUID);
     root
       .last()
       .ele('Symbol')
@@ -274,10 +298,10 @@ export async function exportAsSPL(gameAsJSON: string) {
       .up()
       .ele('Id')
       .ele('FirstLong')
-      .txt('5449758911549343075')
+      .txt(msb)
       .up()
       .ele('SecondLong')
-      .txt('1709749382916375198')
+      .txt(lsb)
       .up()
       .up()
       .ele('AbbreviatedName')
@@ -287,16 +311,20 @@ export async function exportAsSPL(gameAsJSON: string) {
       .txt(unit.OperationalStatus);
   });
 
+  const splID = uuidv4();
+  const msb = getMostSignificantBits(splID);
+  const lsb = getLeastSignificantBits(splID);
+
   root
     .ele('Id', {
       // eslint-disable-next-line
       'xmlns': 'http://schemas.systematic.com/2011/products/layer-definition-v4'
     })
     .ele('FirstLong')
-    .txt('5449758911549343075')
+    .txt(msb)
     .up()
     .ele('SecondLong')
-    .txt('1709749382916375198')
+    .txt(lsb)
     .up()
     .up()
     .ele('Extension', {
